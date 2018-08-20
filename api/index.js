@@ -99,11 +99,9 @@ app.post('/import', upload, async function (req, res) {
                 /** Check the extension of the incoming file and
                  *  use the appropriate module
                  */
-                if(req.file.path.split('.')[req.file.path.split('.').length-1] === 'xlsx'){
+              
                     exceltojson = xlsxtojson;
-                } else {
-                    exceltojson = xlstojson;
-                }
+               
                
                 try {
                     exceltojson({
