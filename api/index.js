@@ -80,10 +80,48 @@ app.post('/import', upload, async function (req, res) {
                     res.json({error_code:1,err_desc:"Corupted excel file"});
                 }
                
-            })
+            }) 
+            break;
     
         case '.xlsx':
-            exceltojson = xlstojson;
+          //  exceltojson = xlstojson;
+            var exceltojson;
+            upload(req,res,function(err){
+                if(err){
+                     res.json({error_code:1,err_desc:err});
+                     return;
+                }
+                /** Multer gives us file info in req.file object */
+                if(!req.file){
+                    res.json({error_code:1,err_desc:"No file passed"});
+                    return;
+                }
+                /** Check the extension of the incoming file and
+                 *  use the appropriate module
+                 */
+                if(req.file.path.split('.')[req.file.path.split('.').length-1] === 'xlsx'){
+                    exceltojson = xlsxtojson;
+                } else {
+                    exceltojson = xlstojson;
+                }
+               
+                try {
+                    exceltojson({
+                        input: req.file.path,
+                        output: null, //since we don't need output.json
+                        lowerCaseHeaders:true
+                    }, function(err,result){
+                        if(err) {
+                            return res.json({error_code:1,err_desc:err, data: null});
+                        }
+                        res.json({error_code:0,err_desc:null, data: result});
+                        console.log(result)
+                    });
+                } catch (e){
+                    res.json({error_code:1,err_desc:"Corupted excel file"});
+                }
+               
+            }) 
             break;
         default:
             res.json({error_code:1,err_desc:'Wrong file type', data: null});
