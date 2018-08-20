@@ -28,8 +28,7 @@ app.listen(3001, function () {
 app.use(bodyparser.json());
 
 const im = require('./fields.js').exam;
-let exam = im;
-const field= {
+const field = {
     std_number: im.fields.std_number.title,
     name: im.fields.name.title,
     family_name: im.fields.family_name.title,
@@ -43,30 +42,28 @@ const field= {
     seat: im.fields.seat.title,//?
     location: im.fields.location.title,
 };
+
 function imported(res, jsonArray) {
     var array = [];
-    console.log(jsonArray);
-    res.json({error_code:0,err_desc:null, data: jsonArray});
     for (var i=0; i < jsonArray.length; i++) {
         array.push({
-            std_number : jsonArray[i].im.fields.std_number.title,
-            name : jsonArray[i].im.fields.name.title,
-            family_name : jsonArray[i].im.fields.family_name.title,
-            course_code : jsonArray[i].im.fields.course_code.title,
-            course_name : jsonArray[i].im.fields.course_name.title,
-            //date : jsonArray[i].exam.fields.date.title,
-            grade : jsonArray[i].im.fields.grade.title,
-            semester : jsonArray[i].im.fields.semester.title,
-            prof_name : jsonArray[i].im.fields.prof_name.title,
-            prof_family_name : jsonArray[i].im.fields.prof_family_name.title,
-            seat : jsonArray[i].im.fields.seat.title,//?
-            location : jsonArray[i].im.fields.location.title
+            std_number : jsonArray[i][field.std_number],
+            name : jsonArray[i][field.name],
+            family_name : jsonArray[i][field.family_name],
+            course_code : jsonArray[i][field.course_code],
+            course_name : jsonArray[i][field.course_name],
+            date : jsonArray[i][exam.fields.date],
+            grade : jsonArray[i][field.grade],
+            semester : jsonArray[i][field.semester],
+            prof_name : jsonArray[i][field.prof_name],
+            prof_family_name : jsonArray[i][field.prof_family_name],
+            seat : jsonArray[i][field.seat],
+            location : jsonArray[i][field.location]
         });
     }
     console.log(array);
     res.send({error_code:0,err_desc:'', data: array});
 }
-
 
 
 
@@ -86,8 +83,7 @@ app.post('/import', upload, async function (req, res) {
             exceltojson = xlsxtojson;
             break;
         default:
-            res.json({error_code:1,err_desc:'Wrong file type', data: null});
-            return;
+            return res.json({error_code:1,err_desc:'Wrong file type', data: null});
     }
 
     exceltojson({
