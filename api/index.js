@@ -20,4 +20,8 @@ app.post('/import', upload ,async function(req,res){
     console.log(array ,"must wait");
       
 })
+<<<<<<< HEAD
 //test
+=======
+//test
+>>>>>>> 52b94379f160a18ae46bf3bf097fcf1ad25f2c53
