@@ -1,5 +1,5 @@
 {
-  "name": "importer",
+  "name": "chavosh-exam-importer-master",
   "version": "1.0.0",
   "description": "Nuxt.js project",
   "author": "saeedehsp <s.sadeghpour97@gmail.com>",
@@ -13,6 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "csvtojson": "^2.0.8",
