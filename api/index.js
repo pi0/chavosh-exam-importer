@@ -17,11 +17,7 @@ app.post('/import', upload ,async function(req,res){
     res.sendStatus(200);
     
     const array= await getfile(req.file );
-    console.log(array ,"must wait");
+    console.log(array);
       
 })
-<<<<<<< HEAD
 //test
-=======
-//test
->>>>>>> 52b94379f160a18ae46bf3bf097fcf1ad25f2c53
