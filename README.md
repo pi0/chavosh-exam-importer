@@ -6,7 +6,7 @@ acceptable column for files are as below:
 
 'نام دانشجو',
 
-'نام خوانوادگی',
+'نام خانوادگی',
   
 'کد درس',
   
