@@ -1,23 +1,30 @@
-# chavosh-exam-importer-master
+A library that provides parsing .xls, xlsx and csv files to json 
 
-> Nuxt.js project
+acceptable column for files are as below:
 
-## Build Setup
+شماره دانشجو'یا'شماره دانشجویی',
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+'نام دانشجو',
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+'نام خوانوادگی',
+  
+'کد درس',
+  
+'نام درس',
 
-# build for production and launch server
-$ npm run build
-$ npm start
+'گروه درس',
 
-# generate static project
-$ npm run generate
-```
+'تاریخ امتحان',
+   
+'مقطع درس',
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+'نیمسال',
 
+'نام استاد',
+   
+'نام خانوادگی استاد',
+
+'شماره صندلی'یا'صندلی',
+
+'محل برگزاری',
+     
