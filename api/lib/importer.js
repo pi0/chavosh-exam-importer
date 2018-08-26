@@ -96,7 +96,7 @@ async function imported(jsonArray) {
 
 async function getfile(file) {
 
-    return new Promise(((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         var exceltojson;
 
@@ -105,8 +105,7 @@ async function getfile(file) {
                 const jsonArray = await
                 csv().fromFile(file.path);
                 console.log(jsonArray);
-                myExam = await
-                imported(jsonArray);
+                myExam = await imported(jsonArray);
                 resolve(myExam);
                 return;
 
@@ -134,7 +133,7 @@ async function getfile(file) {
             return;
         });
 
-    }));
+    });
 }
 
 module.exports = {
