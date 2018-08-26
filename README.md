@@ -28,5 +28,3 @@ acceptable column for files are as below:
 
 'محل برگزاری',
      
-
-![Alt text](https://imgur.com/MxVOd96)     
