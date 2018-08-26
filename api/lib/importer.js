@@ -25,11 +25,7 @@ var myExam = {};
 app.use(bodyparser.json());
 
 const im = require('../fields').exam;
-
 const field = {
-    std_number: im.fields.std_number.title,
-    name: im.fields.name.title,
-    family_name: im.fields.family_name.title,
     course_code: im.fields.course_code.title,
     course_name: im.fields.course_name.title,
     date: im.fields.date.title,
@@ -37,8 +33,14 @@ const field = {
     semester: im.fields.semester.title,
     prof_name: im.fields.prof_name.title,
     prof_family_name: im.fields.prof_family_name.title,
-    seat: im.fields.seat.title,
-    location: im.fields.location.title,
+    participent:{
+        name: im.fields.name.title,
+        family_name: im.fields.family_name.title,
+        std_number: im.fields.std_number.title,
+        seat: im.fields.seat.title,
+        location: im.fields.location.title,
+    
+    }
 };
 
 async function imported(jsonArray) {
@@ -50,14 +52,14 @@ async function imported(jsonArray) {
     var dateform = "";
 
     for (var i = 0; i < jsonArray.length; i++) {
-        for (let index = 0; index < field.family_name.length; index++) {
-            if (jsonArray[i][field.family_name[index]] != undefined) {
-                fname = jsonArray[i][field.family_name[index]];
+        for (let index = 0; index < field.participent.family_name.length; index++) {
+            if (jsonArray[i][field.participent.family_name[index]] != undefined) {
+                fname = jsonArray[i][field.participent.family_name[index]];
             }
         }
-        for (let index = 0; index < field.std_number.length; index++) {
-            if (jsonArray[i][field.std_number[index]] != undefined) {
-                stdno = jsonArray[i][field.std_number[index]];
+        for (let index = 0; index < field.participent.std_number.length; index++) {
+            if (jsonArray[i][field.participent.std_number[index]] != undefined) {
+                stdno = jsonArray[i][field.participent.std_number[index]];
             }
         }
         for (let index = 0; index < field.prof_family_name.length; index++) {
@@ -65,9 +67,9 @@ async function imported(jsonArray) {
                 profname = jsonArray[i][field.prof_family_name[index]];
             }
         }
-        for (let index = 0; index < field.seat.length; index++) {
-            if (jsonArray[i][field.seat[index]] != undefined) {
-                seatno = jsonArray[i][field.seat[index]];
+        for (let index = 0; index < field.participent.seat.length; index++) {
+            if (jsonArray[i][field.participent.seat[index]] != undefined) {
+                seatno = jsonArray[i][field.participent.seat[index]];
             }
         }
 
@@ -76,9 +78,6 @@ async function imported(jsonArray) {
         dateform = arr[0] + "-" + arr[1] + "-" + arr[2];
 
         array.push({
-            std_number: stdno,
-            name: jsonArray[i][field.name],
-            family_name: fname,
             course_code: jsonArray[i][field.course_code],
             course_name: jsonArray[i][field.course_name],
             date: dateform,
@@ -86,8 +85,13 @@ async function imported(jsonArray) {
             semester: jsonArray[i][field.semester],
             prof_name: jsonArray[i][field.prof_name],
             prof_family_name: profname,
-            seat: seatno,
-            location: jsonArray[i][field.location]
+            participent:{
+                name: jsonArray[i][field.participent.name],
+                family_name: fname,
+                std_number: stdno,
+                seat: seatno,
+                location: jsonArray[i][field.participent.location],
+            }
         });
     }
     return array;
