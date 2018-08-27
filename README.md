@@ -2,12 +2,13 @@ A library that provides parsing .xls, xlsx and csv files to json
 
 acceptable column for files are as below:
 
+necessary:
 شماره دانشجو'یا'شماره دانشجویی',
 
 'نام دانشجو',
 
 'نام خانوادگی',
-  
+ 
 'کد درس',
   
 'نام درس',
@@ -15,7 +16,14 @@ acceptable column for files are as below:
 'گروه درس',
 
 'تاریخ امتحان',
+
+'شماره صندلی',
+
+'محل برگزاری',
+     
    
+optional:
+
 'مقطع درس',
 
 'نیمسال',
@@ -24,7 +32,3 @@ acceptable column for files are as below:
    
 'نام خانوادگی استاد',
 
-'شماره صندلی'یا'صندلی',
-
-'محل برگزاری',
-     

@@ -18,6 +18,8 @@ app.post('/import', upload ,async function(req,res){
     
     const array= await getfile(req.file );
     console.log(array);
+
+    
       
 })
 //test

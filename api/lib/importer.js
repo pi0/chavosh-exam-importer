@@ -28,33 +28,94 @@ const im = require('../fields').exam;
 const field = {
     course_code: im.fields.course_code.title,
     course_name: im.fields.course_name.title,
+    
     date: im.fields.date.title,
-    grade: im.fields.grade.title,
-    semester: im.fields.semester.title,
-    prof_name: im.fields.prof_name.title,
-    prof_family_name: im.fields.prof_family_name.title,
+    level: im.fields.level.title,
+    semester: im.fields.semester.title, 
     participent:{
-        name: im.fields.name.title,
-        family_name: im.fields.family_name.title,
+        std_name: im.fields.std_name.title,
+        std_family_name: im.fields.std_family_name.title,
         std_number: im.fields.std_number.title,
         seat: im.fields.seat.title,
         location: im.fields.location.title,
+        prof_name: im.fields.prof_name.title,
+        prof_family_name: im.fields.prof_family_name.title,
+        course_group: im.fields.course_group.title,
     
     }
 };
 
 async function imported(jsonArray) {
     var array = [];
+    var participents = [];
     var fname = "";
     var stdno = "";
     var profname = "";
     var seatno = "";
     var dateform = "";
-
+    
+    
+    var stdname ="";
+    var courseC = "";
+    var courseG = "";
+    var courseN = "";
+    var vlevel = "";
+    var pname = "";
+    var vsem = "";
+    var vloc = "";
+    
+    
+    
     for (var i = 0; i < jsonArray.length; i++) {
-        for (let index = 0; index < field.participent.family_name.length; index++) {
-            if (jsonArray[i][field.participent.family_name[index]] != undefined) {
-                fname = jsonArray[i][field.participent.family_name[index]];
+        for (let index = 0; index < field.participent.std_name.length; index++) {
+            if (jsonArray[i][field.participent.std_name[index]] != undefined) {
+                stdname = jsonArray[i][field.participent.std_name[index]];
+            }
+        }
+        for (let index = 0; index < field.course_name.length; index++) {
+            if (jsonArray[i][field.course_name[index]] != undefined) {
+                courseN = jsonArray[i][field.course_name[index]];
+            }
+        }
+        for (let index = 0; index < field.course_code.length; index++) {
+            if (jsonArray[i][field.course_code[index]] != undefined) {
+                courseC = jsonArray[i][field.course_code[index]];
+            }
+        }
+        for (let index = 0; index < field.participent.course_group.length; index++) {
+            if (jsonArray[i][field.participent.course_group[index]] != undefined) {
+                courseG = jsonArray[i][field.participent.course_group[index]];
+            }
+        }
+        for (let index = 0; index < field.level.length; index++) {
+            if (jsonArray[i][field.level[index]] != undefined) {
+                vlevel = jsonArray[i][field.level[index]];
+            }
+        }
+        for (let index = 0; index < field.participent.prof_name.length; index++) {
+            if (jsonArray[i][field.participent.prof_name[index]] != undefined) {
+                pname = jsonArray[i][field.participent.prof_name[index]];
+            }
+        }
+        for (let index = 0; index < field.semester.length; index++) {
+            if (jsonArray[i][field.semester[index]] != undefined) {
+                vsem = jsonArray[i][field.semester[index]];
+            }
+        }
+        for (let index = 0; index < field.participent.location.length; index++) {
+            if (jsonArray[i][field.participent.location[index]] != undefined) {
+                vloc = jsonArray[i][field.participent.location[index]];
+            }
+        }
+        
+
+
+
+
+
+        for (let index = 0; index < field.participent.std_family_name.length; index++) {
+            if (jsonArray[i][field.participent.std_family_name[index]] != undefined) {
+                fname = jsonArray[i][field.participent.std_family_name[index]];
             }
         }
         for (let index = 0; index < field.participent.std_number.length; index++) {
@@ -62,9 +123,9 @@ async function imported(jsonArray) {
                 stdno = jsonArray[i][field.participent.std_number[index]];
             }
         }
-        for (let index = 0; index < field.prof_family_name.length; index++) {
-            if (jsonArray[i][field.prof_family_name[index]] != undefined) {
-                profname = jsonArray[i][field.prof_family_name[index]];
+        for (let index = 0; index < field.participent.prof_family_name.length; index++) {
+            if (jsonArray[i][field.participent.prof_family_name[index]] != undefined) {
+                profname = jsonArray[i][field.participent.prof_family_name[index]];
             }
         }
         for (let index = 0; index < field.participent.seat.length; index++) {
@@ -72,29 +133,40 @@ async function imported(jsonArray) {
                 seatno = jsonArray[i][field.participent.seat[index]];
             }
         }
+        
+        for (let index = 0; index < field.date.length; index++) {
+            if (jsonArray[i][field.date[index]] != undefined) {
+                var arr = [];
+                arr = jsonArray[i][field.date].split("/");
+                dateform = arr[0] + "-" + arr[1] + "-" + arr[2];
+            }
+            
+        }
+        
 
-        var arr = [];
-        arr = jsonArray[i][field.date].split("/");
-        dateform = arr[0] + "-" + arr[1] + "-" + arr[2];
-
-        array.push({
-            course_code: jsonArray[i][field.course_code],
-            course_name: jsonArray[i][field.course_name],
-            date: dateform,
-            grade: jsonArray[i][field.grade],
-            semester: jsonArray[i][field.semester],
-            prof_name: jsonArray[i][field.prof_name],
-            prof_family_name: profname,
-            participent:{
-                name: jsonArray[i][field.participent.name],
-                family_name: fname,
+        participents.push({
+                std_name: stdname,
+                std_family_name: fname,
                 std_number: stdno,
                 seat: seatno,
-                location: jsonArray[i][field.participent.location],
-            }
+                location: vloc,
+                prof_name: pname,
+                prof_family_name: profname,
+                course_group: courseG
+            
         });
     }
-    return array;
+    array.push({
+        course_code: courseC,
+        course_name: courseN,
+        date: dateform,
+        level: vlevel,
+        semester: vsem
+        });
+    
+    return {array,participents};
+  
+    
 }
 
 
@@ -108,7 +180,7 @@ async function getfile(file) {
             case '.csv':
                 const jsonArray = await
                 csv().fromFile(file.path);
-                console.log(jsonArray);
+                //console.log(jsonArray);
                 myExam = await imported(jsonArray);
                 resolve(myExam);
                 return;
