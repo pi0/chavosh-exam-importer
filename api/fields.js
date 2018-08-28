@@ -2,8 +2,8 @@ exports.exam = {
   key: 'exam',
   title: 'آزمون',
   fields: {
-      std_number: {
-      title: ['شماره دانشجو','شماره دانشجویی'],
+    std_number: {
+      title: ['شماره دانشجو', 'شماره دانشجویی'],
       type: 'string'
     },
     std_name: {
@@ -11,31 +11,31 @@ exports.exam = {
       type: 'string'
     },
     std_family_name: {
-      title: ['نام خوانوادگی','نام خانوادگی دانشجو'],
+      title: ['نام خوانوادگی', 'نام خانوادگی دانشجو'],
       type: 'string'
     },
     course_code: {
-      title:[ 'کد درس'],
+      title: ['کد درس'],
       type: 'string'
     },
     course_name: {
-      title:[ 'نام درس'],
+      title: ['نام درس'],
       type: 'string'
     },
     course_group: {
-      title:[ 'گروه درس'],
+      title: ['گروه درس'],
       type: 'string'
     },
     date: {
-      title:[ 'تاریخ امتحان'],
+      title: ['تاریخ امتحان'],
       type: 'date'
     },
     level: {
-      title:[ 'مقطع درس'],
+      title: ['مقطع درس'],
       type: 'string'
     },
-     semester: {
-      title:[ 'نیمسال'],
+    semester: {
+      title: ['نیمسال'],
       type: 'string'
     },
     prof_name: {
@@ -43,17 +43,17 @@ exports.exam = {
       type: 'string'
     },
     prof_family_name: {
-      title:[ 'نام خانوادگی استاد','نام خانوادگی'],
+      title: ['نام خانوادگی استاد', 'نام خانوادگی'],
       type: 'string'
     },
     seat: {
-      title: ['شماره صندلی','صندلی'],
+      title: ['شماره صندلی', 'صندلی'],
       type: 'string'
     },
     location: {
       title: ['محل برگزاری'],
       type: 'string'
-    },
+    }
 
   }
 }

@@ -5,7 +5,6 @@ const path = require('path')
 const multer = require('multer')
 var moment = require('moment-jalaali')
 const im = require('../fields').exam
-
 const upload = multer({ // multer settings
   dest: 'uploads/',
   fileFilter: function (req, file, callback) { // file filter
@@ -21,7 +20,6 @@ var myExam = {}
 const field = {
   course_code: im.fields.course_code.title,
   course_name: im.fields.course_name.title,
-
   date: im.fields.date.title,
   level: im.fields.level.title,
   semester: im.fields.semester.title,
@@ -34,7 +32,6 @@ const field = {
     prof_name: im.fields.prof_name.title,
     prof_family_name: im.fields.prof_family_name.title,
     course_group: im.fields.course_group.title
-
   }
 } // filed is used to access the the name of the fields in excel file
 
@@ -62,7 +59,6 @@ async function imported (jsonArray) {
     level: stcontent.vlevel,
     semester: stcontent.vsem
   }
-
   return {exam, participants}
 }
 
@@ -74,18 +70,15 @@ async function getfile (file) {
     switch (path.extname(file.originalname)) {
       case '.csv':
         const jsonArray = await csv().fromFile(file.path)
-        // console.log(jsonArray);
         myExam = await imported(jsonArray)
         resolve(myExam)
         return
 
       case '.xls':
-
         ws = XLSX.readFile(file.path)
         json = XLSX.utils.sheet_to_json(ws.Sheets[ws.SheetNames[0]])
         myExam = await imported(json)
         resolve(myExam)
-        //   exceltojson = xlstojson;
         break
       case '.xlsx':
         ws = XLSX.readFile(file.path)
@@ -96,19 +89,6 @@ async function getfile (file) {
       default:
         resolve(0)
     }
-
-    // exceltojson({
-    //     input: file.path,
-    //     output: null, //since we don't need output.json
-    //     lowerCaseHeaders: true
-    // }, async function (err, result) {
-    //     if (err) {
-    //         return err;
-    //     }
-    //     myExam = await imported(result);
-    //     resolve(myExam);
-    //     return;
-    // });
   })
 }
 
