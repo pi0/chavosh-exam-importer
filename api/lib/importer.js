@@ -4,6 +4,8 @@ var xlsxtojson = require("xlsx-to-json-lc")
 const cors = require('cors')
 const bodyparser = require('body-parser')
 const csv = require('csvtojson')
+var xlsx = require("xlsx")
+
 const path = require('path')
 const multer = require('multer')
 var moment = require('moment-jalaali')
