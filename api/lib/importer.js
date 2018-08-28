@@ -1,11 +1,10 @@
 'use strict'
-var xlstojson = require("xls-to-json-lc")
-var xlsxtojson = require("xlsx-to-json-lc")
+// var xlstojson = require("xls-to-json-lc")
+// var xlsxtojson = require("xlsx-to-json-lc")
 const cors = require('cors')
 const bodyparser = require('body-parser')
 const csv = require('csvtojson')
-var xlsx = require("xlsx")
-
+const XLSX = require('xlsx');
 const path = require('path')
 const multer = require('multer')
 var moment = require('moment-jalaali')
@@ -172,6 +171,8 @@ async function getfile(file) {
     return new Promise(async (resolve, reject) => {
 
         var exceltojson;
+        let ws;
+        let json;
 
         switch (path.extname(file.originalname)) {
             case '.csv':
@@ -183,28 +184,36 @@ async function getfile(file) {
                 return;
 
             case '.xls':
-                exceltojson = xlstojson;
+            
+            ws = XLSX.readFile(file.path);
+            json = XLSX.utils.sheet_to_json(ws.Sheets[ws.SheetNames[0]]);
+            myExam = await imported(json)
+            resolve(myExam)
+             //   exceltojson = xlstojson;
                 break;
             case '.xlsx':
-                exceltojson = xlsxtojson;
+            ws = XLSX.readFile(file.path);
+            json = XLSX.utils.sheet_to_json(ws.Sheets[ws.SheetNames[0]]);
+            myExam = await imported(json)
+            resolve(myExam)
                 break;
             default:
                 resolve(0);
                 return;
         }
 
-        exceltojson({
-            input: file.path,
-            output: null, //since we don't need output.json
-            lowerCaseHeaders: true
-        }, async function (err, result) {
-            if (err) {
-                return err;
-            }
-            myExam = await imported(result);
-            resolve(myExam);
-            return;
-        });
+        // exceltojson({
+        //     input: file.path,
+        //     output: null, //since we don't need output.json
+        //     lowerCaseHeaders: true
+        // }, async function (err, result) {
+        //     if (err) {
+        //         return err;
+        //     }
+        //     myExam = await imported(result);
+        //     resolve(myExam);
+        //     return;
+        // });
 
     });
 }
